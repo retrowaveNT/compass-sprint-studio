@@ -63,7 +63,7 @@ function LoginPage() {
           <div className="mt-10 space-y-4">
             {STATS.map((s) => (
               <div key={s.label} className="flex items-baseline gap-4 border-b border-border pb-4">
-                <span className="font-display w-24 text-2xl font-semibold text-primary">
+                <span className="font-display w-28 shrink-0 text-2xl font-semibold whitespace-nowrap text-primary">
                   {s.value}
                 </span>
                 <span className="text-sm text-muted-foreground">{s.label}</span>
