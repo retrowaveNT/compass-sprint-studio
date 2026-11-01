@@ -9,50 +9,204 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellRouteImport } from './routes/_shell'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ShellIndexRouteImport } from './routes/_shell/index'
+import { Route as ShellAnalyticsRouteImport } from './routes/_shell/analytics'
+import { Route as ShellBacklogRouteImport } from './routes/_shell/backlog'
+import { Route as ShellBoardRouteImport } from './routes/_shell/board'
+import { Route as ShellSettingsRouteImport } from './routes/_shell/settings'
+import { Route as ShellSprintsRouteImport } from './routes/_shell/sprints'
 
-const IndexRoute = IndexRouteImport.update({
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShellIndexRoute = ShellIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBacklogRoute = ShellBacklogRouteImport.update({
+  id: '/backlog',
+  path: '/backlog',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBoardRoute = ShellBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellSprintsRoute = ShellSprintsRouteImport.update({
+  id: '/sprints',
+  path: '/sprints',
+  getParentRoute: () => ShellRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof ShellIndexRoute
+  '/login': typeof LoginRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/backlog': typeof ShellBacklogRoute
+  '/board': typeof ShellBoardRoute
+  '/settings': typeof ShellSettingsRoute
+  '/sprints': typeof ShellSprintsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/backlog': typeof ShellBacklogRoute
+  '/board': typeof ShellBoardRoute
+  '/settings': typeof ShellSettingsRoute
+  '/sprints': typeof ShellSprintsRoute
+  '/': typeof ShellIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_shell/analytics': typeof ShellAnalyticsRoute
+  '/_shell/backlog': typeof ShellBacklogRoute
+  '/_shell/board': typeof ShellBoardRoute
+  '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/sprints': typeof ShellSprintsRoute
+  '/_shell/': typeof ShellIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/analytics'
+    | '/backlog'
+    | '/board'
+    | '/settings'
+    | '/sprints'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/login'
+    | '/analytics'
+    | '/backlog'
+    | '/board'
+    | '/settings'
+    | '/sprints'
+    | '/'
+  id:
+    | '__root__'
+    | '/_shell'
+    | '/login'
+    | '/_shell/analytics'
+    | '/_shell/backlog'
+    | '/_shell/board'
+    | '/_shell/settings'
+    | '/_shell/sprints'
+    | '/_shell/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_shell/': {
+      id: '/_shell/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ShellIndexRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/analytics': {
+      id: '/_shell/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ShellAnalyticsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/backlog': {
+      id: '/_shell/backlog'
+      path: '/backlog'
+      fullPath: '/backlog'
+      preLoaderRoute: typeof ShellBacklogRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/board': {
+      id: '/_shell/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof ShellBoardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/sprints': {
+      id: '/_shell/sprints'
+      path: '/sprints'
+      fullPath: '/sprints'
+      preLoaderRoute: typeof ShellSprintsRouteImport
+      parentRoute: typeof ShellRoute
     }
   }
 }
 
+interface ShellRouteChildren {
+  ShellAnalyticsRoute: typeof ShellAnalyticsRoute
+  ShellBacklogRoute: typeof ShellBacklogRoute
+  ShellBoardRoute: typeof ShellBoardRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+  ShellSprintsRoute: typeof ShellSprintsRoute
+  ShellIndexRoute: typeof ShellIndexRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyticsRoute: ShellAnalyticsRoute,
+  ShellBacklogRoute: ShellBacklogRoute,
+  ShellBoardRoute: ShellBoardRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+  ShellSprintsRoute: ShellSprintsRoute,
+  ShellIndexRoute: ShellIndexRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
