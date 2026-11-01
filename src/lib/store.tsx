@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -421,10 +422,11 @@ export function useTasks() {
 }
 
 export function useTheme() {
-  const [dark, setDark] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return document.documentElement.classList.contains("dark");
-  });
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   const toggle = useCallback(() => {
     setDark((prev) => {
