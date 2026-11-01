@@ -70,6 +70,8 @@ export const TEAM = [
   { name: "Игорь Панов", initials: "ИП", color: "oklch(0.72 0.15 75)" },
 ];
 
+export const ME = TEAM[0]!;
+
 export const SPRINTS: Sprint[] = [
   {
     id: "s12",

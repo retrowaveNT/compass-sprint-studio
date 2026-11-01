@@ -3,7 +3,7 @@ import { Bell, Moon, Palette, ShieldAlert, User } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { TEAM, useTheme } from "@/lib/store";
+import { ME, useTheme } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_shell/settings")({
@@ -90,7 +90,7 @@ function Row({
 
 function Settings() {
   const { dark, toggle } = useTheme();
-  const [name, setName] = useState(TEAM[0].name);
+  const [name, setName] = useState(ME.name);
   const [email, setEmail] = useState("anna@company.ru");
   const [notifs, setNotifs] = useState({ mentions: true, deadlines: true, digest: false, ai: true });
 

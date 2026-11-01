@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { useTasks, useTheme, TEAM } from "@/lib/store";
+import { useTasks, useTheme, ME } from "@/lib/store";
 import { cn } from "@/lib/utils";
 import { AiAssistant } from "@/components/AiAssistant";
 import { TaskDrawer } from "@/components/TaskDrawer";
@@ -88,12 +88,12 @@ export function AppShell() {
           <div className="flex items-center gap-3 px-1">
             <span
               className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white"
-              style={{ backgroundColor: TEAM[0].color }}
+              style={{ backgroundColor: ME.color }}
             >
-              {TEAM[0].initials}
+              {ME.initials}
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold">{TEAM[0].name}</p>
+              <p className="truncate text-sm font-semibold">{ME.name}</p>
               <p className="truncate text-xs text-muted-foreground">Владелец продукта</p>
             </div>
             <button

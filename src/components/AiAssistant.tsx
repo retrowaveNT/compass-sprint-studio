@@ -40,7 +40,7 @@ function buildReply(question: string, tasks: ReturnType<typeof useTasks>["tasks"
       acc[t.priority] = (acc[t.priority] ?? 0) + 1;
       return acc;
     }, {});
-    return `Активных задач: ${active.length}. По приоритетам: срочных — ${byP.urgent ?? 0}, высоких — ${byP.high ?? 0}, средних — ${byP.medium ?? 0}, низких — ${byP.low ?? 0}. Рекомендую не брать в спринт новые задачи, пока не закрыты срочные.`;
+    return `Активных задач: ${active.length}. По приоритетам: срочных — ${byP["urgent"] ?? 0}, высоких — ${byP["high"] ?? 0}, средних — ${byP["medium"] ?? 0}, низких — ${byP["low"] ?? 0}. Рекомендую не брать в спринт новые задачи, пока не закрыты срочные.`;
   }
   if (q.includes("статус") || q.includes("доска")) {
     const byS = active.reduce<Record<string, number>>((acc, t) => {

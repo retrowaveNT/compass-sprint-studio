@@ -3,6 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import {
+  ME,
   PRIORITY_LABELS,
   STATUS_LABELS,
   TEAM,
@@ -17,7 +18,7 @@ export function CreateTaskDialog({ open, onClose }: { open: boolean; onClose: ()
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<Priority>("medium");
   const [status, setStatus] = useState<Status>("todo");
-  const [assignee, setAssignee] = useState(TEAM[0].name);
+  const [assignee, setAssignee] = useState(ME.name);
   const [dueDate, setDueDate] = useState("");
 
   if (!open) return null;
